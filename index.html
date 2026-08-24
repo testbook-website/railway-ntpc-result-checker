@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RRB NTPC Result Checker Widget</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Background gradient container (only visible if opened standalone) -->
+  <div class="standalone-bg"></div>
+
+  <!-- Widget Card -->
+  <div class="widget-card">
+    
+    <!-- VIEW 1: Input Form Panel -->
+    <div id="form-panel" class="view-panel">
+      <!-- Header -->
+      <div class="widget-header">
+        <div class="widget-logo">RRB</div>
+        <h1 class="widget-title">NTPC Result Checker</h1>
+        <p class="widget-subtitle">CEN No. 07/2025 (CBT-1 Results)</p>
+      </div>
+
+      <!-- Result Checking Form -->
+      <form id="checker-form" novalidate>
+        
+        <!-- Zone Dropdown -->
+        <div class="form-group">
+          <label for="zone-select" class="form-label">Select Zone</label>
+          <div class="input-container">
+            <select id="zone-select" class="form-input" required>
+              <option value="">Select Zone</option>
+              <!-- Populated by JavaScript -->
+            </select>
+            <span class="input-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </span>
+          </div>
+          <div id="zone-select-error" class="error-msg"></div>
+        </div>
+
+        <!-- Name Input -->
+        <div class="form-group">
+          <label for="name-input" class="form-label">Candidate Name</label>
+          <div class="input-container">
+            <input type="text" id="name-input" class="form-input" placeholder="Enter Full Name" required autocomplete="name">
+            <span class="input-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </span>
+          </div>
+          <div id="name-input-error" class="error-msg"></div>
+        </div>
+
+        <!-- Mobile Input -->
+        <div class="form-group">
+          <label for="mobile-input" class="form-label">Mobile Number</label>
+          <div class="input-container">
+            <input type="tel" id="mobile-input" class="form-input" placeholder="10-Digit Mobile No." maxlength="10" required autocomplete="tel">
+            <span class="input-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </span>
+          </div>
+          <div id="mobile-input-error" class="error-msg"></div>
+        </div>
+
+        <!-- Roll Number Input -->
+        <div class="form-group">
+          <label for="roll-input" class="form-label">Roll Number</label>
+          <div class="input-container">
+            <input type="text" id="roll-input" class="form-input" placeholder="15-Digit Roll Number" maxlength="15" required autocomplete="off">
+            <span class="input-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </span>
+          </div>
+          <div id="roll-input-error" class="error-msg"></div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" id="submit-btn" class="submit-btn">
+          <span id="btn-text">Check Result</span>
+          <div id="submit-spinner" class="spinner"></div>
+        </button>
+      </form>
+    </div>
+
+    <!-- VIEW 2: Qualified Panel -->
+    <div id="qualified-panel" class="view-panel hidden">
+      <div class="result-status qualified">
+        <div class="result-icon-container">
+          <span class="result-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+            </svg>
+          </span>
+        </div>
+        <div class="result-badge">Qualified</div>
+        <h2 class="result-heading">Congratulations!</h2>
+        <p class="result-msg">You have been provisionally shortlisted for the 2nd Stage CBT Exam!</p>
+        
+        <!-- Candidate Details Table -->
+        <div class="detail-table">
+          <div class="detail-row">
+            <span class="detail-label">Name</span>
+            <span id="q-name" class="detail-value">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Roll Number</span>
+            <span id="q-roll" class="detail-value">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Zone</span>
+            <span id="q-zone" class="detail-value">-</span>
+          </div>
+        </div>
+
+        <!-- Go Back Button -->
+        <button class="action-btn back-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Check Another Roll Number
+        </button>
+      </div>
+    </div>
+
+    <!-- VIEW 3: Not Qualified Panel -->
+    <div id="not-qualified-panel" class="view-panel hidden">
+      <div class="result-status not-qualified">
+        <div class="result-icon-container">
+          <span class="result-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </span>
+        </div>
+        <div class="result-badge">Not Found</div>
+        <h2 class="result-heading">Not Found</h2>
+        <p class="result-msg">Your roll number is not in the qualified list for this zone. Keep trying!</p>
+        
+        <!-- Candidate Details Table -->
+        <div class="detail-table">
+          <div class="detail-row">
+            <span class="detail-label">Name</span>
+            <span id="nq-name" class="detail-value">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Roll Number</span>
+            <span id="nq-roll" class="detail-value">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Zone</span>
+            <span id="nq-zone" class="detail-value">-</span>
+          </div>
+        </div>
+
+        <!-- Go Back Button -->
+        <button class="action-btn back-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Check Another Roll Number
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
