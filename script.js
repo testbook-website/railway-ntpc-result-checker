@@ -11,6 +11,7 @@ const ZONES = [
   { id: "ahmedabad", name: "Ahmedabad", active: true },
   { id: "bilaspur", name: "Bilaspur", active: true },
   { id: "muzaffarpur", name: "Muzaffarpur", active: true },
+  { id: "silguri", name: "Silguri", active: true },
 ];
 
 // In-memory cache for loaded zone data (Sets of roll numbers for O(1) lookup)
