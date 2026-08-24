@@ -61,7 +61,7 @@ def extract_roll_numbers():
             for idx in range(num_pages):
                 page_text = reader.pages[idx].extract_text()
                 if page_text:
-                    all_text += page_text
+                    all_text += page_text + "\n"
 
             # CEN 07/2025 RRB Roll numbers are 15-digit numeric sequences
             roll_numbers = re.findall(r'\b\d{15}\b', all_text)
