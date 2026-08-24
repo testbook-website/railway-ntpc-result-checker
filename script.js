@@ -10,6 +10,7 @@ const APPS_SCRIPT_DEPLOYMENT_ID = "AKfycbwab5w_iE8zRH_0Eo8nlXthGPf5ALNHr1quqRRog
 const ZONES = [
   { id: "ahmedabad", name: "Ahmedabad", active: true },
   { id: "bilaspur", name: "Bilaspur", active: true },
+  { id: "gorakhpur", name: "Gorakhpur", active: true },
   { id: "muzaffarpur", name: "Muzaffarpur", active: true },
   { id: "silguri", name: "Silguri", active: true },
 ];
