@@ -10,7 +10,7 @@ def clean_zone_name(filename):
         name = name[:-4]
         
     # Words to remove
-    words_to_remove = ["rrb", "ntpc", "ug", "cbt1", "cbt-1", "publishing", "report", "v1.0", "07_2025", "07-2025"]
+    words_to_remove = ["rrb", "ntpc", "ug", "cbt1", "cbt-1", "publishing", "report", "v1.0", "07_2025", "07-2025", "results", "result"]
     for w in words_to_remove:
         name = name.replace(w, " ")
         
