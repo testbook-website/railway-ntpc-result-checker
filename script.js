@@ -12,7 +12,9 @@ const ZONES = [
   { id: "bilaspur", name: "Bilaspur", active: true },
   { id: "chandigarh", name: "Chandigarh", active: true },
   { id: "gorakhpur", name: "Gorakhpur", active: true },
+  { id: "guwahati", name: "Guwahati", active: true },
   { id: "muzaffarpur", name: "Muzaffarpur", active: true },
+  { id: "ranchi", name: "Ranchi", active: true },
   { id: "silguri", name: "Silguri", active: true },
   { id: "thiruvananthapuram", name: "Thiruvananthapuram", active: true },
 ];
