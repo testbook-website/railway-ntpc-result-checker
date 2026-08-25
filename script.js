@@ -20,6 +20,7 @@ const ZONES = [
   { id: "mumbai", name: "Mumbai", active: true },
   { id: "muzaffarpur", name: "Muzaffarpur", active: true },
   { id: "ranchi", name: "Ranchi", active: true },
+  { id: "secunderabad", name: "Secunderabad", active: true },
   { id: "silguri", name: "Silguri", active: true },
   { id: "thiruvananthapuram", name: "Thiruvananthapuram", active: true },
 ];
